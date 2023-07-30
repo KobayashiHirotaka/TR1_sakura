@@ -46,14 +46,6 @@ private: // メンバ変数
 	Input* input_ = nullptr;
 	Audio* audio_ = nullptr;
 
-	uint32_t textureHandle_ = 0;
-	Model* model_ = nullptr;
-
-	WorldTransform worldTransform_;
-	ViewProjection viewProjection_;
-
-	DebugCamera* debugCamera_ = nullptr;
-
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>

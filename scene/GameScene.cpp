@@ -6,9 +6,7 @@ GameScene::GameScene() {}
 
 GameScene::~GameScene() 
 { 
-	delete model_;
 
-	delete debugCamera_;
 }
 
 void GameScene::Initialize() {
@@ -17,19 +15,11 @@ void GameScene::Initialize() {
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
 
-	textureHandle_ = TextureManager::Load("sample.png");
-
-	model_ = Model::Create();
-
-	worldTransform_.Initialize();
-	viewProjection_.Initialize();
-
-	debugCamera_ = new DebugCamera(1280, 720);
 }
 
 void GameScene::Update() 
 { 
-	debugCamera_->Update();
+	
 }
 
 void GameScene::Draw() {
@@ -60,7 +50,6 @@ void GameScene::Draw() {
 	/// </summary>
 	/*model_->Draw(worldTransform_, viewProjection_, textureHandle_);*/
 
-	model_->Draw(worldTransform_, debugCamera_->GetViewProjection(), textureHandle_);
 
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();
