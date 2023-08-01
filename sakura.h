@@ -13,7 +13,7 @@ public:
 	void Draw(ViewProjection& viewProjection);
 
 private:
-	WorldTransform worldTransform_;
+	WorldTransform worldTransform_[20];
 
-	Model* model_ = nullptr;
+	Model* model_;
 };

@@ -7,7 +7,6 @@ GameScene::GameScene() {}
 
 GameScene::~GameScene() {
 	delete model_;
-	delete player_;
 	delete debugCamera_;
 	delete sakura_;
 	delete sakuraModel_;
@@ -25,10 +24,6 @@ void GameScene::Initialize() {
 	worldTransform_.Initialize();
 	viewProjection_.Initialize();
 
-	// 自キャラの生成
-	player_ = new Player();
-	// 自キャラの初期化
-	player_->Initialize(model_, textureHandle_);
 
 	debugCamera_ = new DebugCamera(50, 50);
 
@@ -41,8 +36,6 @@ void GameScene::Initialize() {
 }
 
 void GameScene::Update() {
-	// 自キャラの更新
-	player_->Update();
 
 	sakura_->Update();
 
@@ -89,8 +82,6 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
-	
-	player_->Draw(viewProjection_);
 
 	sakura_->Draw(viewProjection_);
 
