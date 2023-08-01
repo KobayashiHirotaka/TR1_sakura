@@ -10,6 +10,7 @@
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
+#include "sakura.h"
 
 /// <summary>
 /// ゲームシーン
@@ -58,6 +59,9 @@ private: // メンバ変数
 	bool isDebugCameraActive_ = false;
 
 	DebugCamera* debugCamera_ = nullptr;
+
+	sakura* sakura_;
+	Model* sakuraModel_ = nullptr;
 
 	/// <summary>
 	/// ゲームシーン用

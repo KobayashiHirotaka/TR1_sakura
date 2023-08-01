@@ -17,7 +17,7 @@ void Player::Initialize(Model* model, uint32_t textureHandle) {
 	std::random_device rd;
 	gen_.seed(rd());
 
-	std::uniform_real_distribution<float> dis(0.0f, 18.0f);
+	std::uniform_real_distribution<float> dis(5.0f, 20.0f);
 	worldTransform_.translation_.y = dis(gen_);
 
 	worldTransform_.Initialize();

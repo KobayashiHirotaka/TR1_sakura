@@ -9,6 +9,8 @@ GameScene::~GameScene() {
 	delete model_;
 	delete player_;
 	delete debugCamera_;
+	delete sakura_;
+	delete sakuraModel_;
 }
 
 void GameScene::Initialize() {
@@ -32,11 +34,17 @@ void GameScene::Initialize() {
 
 	AxisIndicator::GetInstance()->SetVisible(true);
 	AxisIndicator::GetInstance()->SetTargetViewProjection(&viewProjection_);
+
+	sakuraModel_ = Model::CreateFromOBJ("SAKURA", true);
+	sakura_ = new sakura();
+	sakura_->Initialize(sakuraModel_);
 }
 
 void GameScene::Update() {
 	// 自キャラの更新
 	player_->Update();
+
+	sakura_->Update();
 
 	debugCamera_->Update();
 #ifdef _DEBUG
@@ -83,6 +91,8 @@ void GameScene::Draw() {
 	/// </summary>
 	
 	player_->Draw(viewProjection_);
+
+	sakura_->Draw(viewProjection_);
 
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();
