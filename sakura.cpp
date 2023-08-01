@@ -41,7 +41,7 @@ float sakura::RandomTX()
 	float minY = 40.0f;
 	float maxY = 120.0f;
 
-
+	return minY + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (maxY - minY)));
 }
 
 float sakura::RandomTY() 
@@ -69,7 +69,7 @@ float sakura::RandomSpeed() {
 
 float sakura::RandomRotate() {
 	float minY = 0.01f;
-	float maxY = 0.05f;
+	float maxY = 0.1f;
 
 	return minY + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (maxY - minY)));
 }
