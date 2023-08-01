@@ -8,6 +8,7 @@ GameScene::GameScene() {}
 GameScene::~GameScene() {
 	delete model_;
 	delete debugCamera_;
+	delete sprite_;
 	delete sakura_;
 	delete sakuraModel_;
 }
@@ -18,8 +19,10 @@ void GameScene::Initialize() {
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
 
-	textureHandle_ = TextureManager::Load("sample.png");
+	textureHandle_ = TextureManager::Load("Black.png");
 	model_ = Model::Create();
+
+	sprite_ = Sprite::Create(textureHandle_, {0, 0});
 
 	worldTransform_.Initialize();
 	viewProjection_.Initialize();
@@ -68,6 +71,7 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
 	/// </summary>
+	sprite_->Draw();
 
 	// スプライト描画後処理
 	Sprite::PostDraw();
