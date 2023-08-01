@@ -12,8 +12,20 @@ public:
 
 	void Draw(ViewProjection& viewProjection);
 
+	float RandomTX();
+
+	float RandomTY();
+
+	float RandomTZ();
+
+	float RandomSpeed();
+
+	float RandomRotate();
+
 private:
-	WorldTransform worldTransform_[20];
+	WorldTransform worldTransform_[100];
 
 	Model* model_;
+
+	const int MaxSakura = 100;
 };

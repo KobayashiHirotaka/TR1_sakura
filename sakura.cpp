@@ -1,36 +1,75 @@
 #include "sakura.h"
 #include <cassert>
+#include <cstdlib> 
 
 void sakura::Initialize(Model* model) {
 	assert(model);
 	model_ = model;
 
-	worldTransform_[0].Initialize();
-	worldTransform_[0].translation_.x = 40;
-	worldTransform_[0].translation_.y = static_cast<float>(rand() % 70 - 35);
-	worldTransform_[0].translation_.z = 40;
+	for (int i = 0; i < MaxSakura; i++)
+	{
+		worldTransform_[i].Initialize();
+		worldTransform_[i].translation_.x = RandomTX();
+		worldTransform_[i].translation_.y = RandomTY();
+		worldTransform_[i].translation_.z = RandomTZ();
+	}
 
-	worldTransform_[1].Initialize();
-	worldTransform_[1].translation_.x = 40;
-	worldTransform_[1].translation_.z = -28;
 }
 
 void sakura::Update() 
 { 
-	worldTransform_[0].translation_.x -= 0.01f;
-	worldTransform_[0].translation_.y -= 0.01f;
-	worldTransform_[0].rotation_.x += 0.03f;
-	/*worldTransform_[0].rotation_.y += 0.03f;*/
-	worldTransform_[0].UpdateMatrix(); 
 
-	worldTransform_[1].translation_.x -= 0.08f;
-	worldTransform_[1].rotation_.x += 0.03f;
-	worldTransform_[1].rotation_.y += 0.03f;
-	worldTransform_[1].UpdateMatrix(); 
+	for (int i = 0; i < MaxSakura; i++)
+	{
+		worldTransform_[i].translation_.x -= RandomSpeed();
+		worldTransform_[i].rotation_.x += RandomRotate();
+		worldTransform_[i].rotation_.y += RandomRotate();
+		worldTransform_[i].UpdateMatrix(); 
+	}
 }
 
-void sakura::Draw(ViewProjection& viewProjection) {
-	model_->Draw(worldTransform_[0], viewProjection);
+void sakura::Draw(ViewProjection& viewProjection) 
+{
+	for (int i = 0; i < MaxSakura; i++)
+	{
+		model_->Draw(worldTransform_[i], viewProjection);
+	}
+}
 
-	model_->Draw(worldTransform_[1], viewProjection);
+float sakura::RandomTX()
+{
+	float minY = 40.0f;
+	float maxY = 120.0f;
+
+
+}
+
+float sakura::RandomTY() 
+{
+	float minY = -35.0f;
+	float maxY = 35.0f;
+
+	return minY + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (maxY - minY)));
+}
+
+float sakura::RandomTZ() 
+{
+	float minY = -28.0f;
+	float maxY = 40.0f;
+
+	return minY + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (maxY - minY)));
+}
+
+float sakura::RandomSpeed() {
+	float minY = 0.01f;
+	float maxY = 0.08f;
+
+	return minY + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (maxY - minY)));
+}
+
+float sakura::RandomRotate() {
+	float minY = 0.01f;
+	float maxY = 0.05f;
+
+	return minY + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (maxY - minY)));
 }
