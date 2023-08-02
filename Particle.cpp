@@ -13,7 +13,8 @@ void Particle::Update()
 { 
 	for (int i = 0; i < maxParticle; i++)
 	{
-		if (isAlive[i] == 0) {
+		if (isAlive[i] == 0)
+		{
 			isAlive[i] = 1;
 			worldTransform_[i].translation_.x = RandomTX();
 			worldTransform_[i].translation_.y = RandomTY();
