@@ -7,10 +7,9 @@ GameScene::GameScene() {}
 
 GameScene::~GameScene() {
 	delete model_;
-	delete debugCamera_;
 	delete sprite_;
-	delete sakura_;
-	delete sakuraModel_;
+	delete particle_;
+	delete particleModel_;
 }
 
 void GameScene::Initialize() {
@@ -27,36 +26,17 @@ void GameScene::Initialize() {
 	worldTransform_.Initialize();
 	viewProjection_.Initialize();
 
-
-	debugCamera_ = new DebugCamera(50, 50);
-
 	AxisIndicator::GetInstance()->SetVisible(true);
 	AxisIndicator::GetInstance()->SetTargetViewProjection(&viewProjection_);
 
-	sakuraModel_ = Model::CreateFromOBJ("SAKURA", true);
-	sakura_ = new sakura();
-	sakura_->Initialize(sakuraModel_);
+	particleModel_ = Model::CreateFromOBJ("SAKURA", true);
+	particle_ = new Particle();
+	particle_->Initialize(particleModel_);
 }
 
-void GameScene::Update() {
-
-	sakura_->Update();
-
-	debugCamera_->Update();
-#ifdef _DEBUG
-	if (input_->TriggerKey(DIK_RETURN)) {
-		isDebugCameraActive_ = true;
-	}
-#endif
-
-	if (isDebugCameraActive_) {
-		debugCamera_->Update();
-		viewProjection_.matView = debugCamera_->GetViewProjection().matView;
-		viewProjection_.matProjection = debugCamera_->GetViewProjection().matProjection;
-		viewProjection_.TransferMatrix();
-	} else {
-		viewProjection_.UpdateMatrix();
-	}
+void GameScene::Update()
+{
+	particle_->Update();
 }
 
 void GameScene::Draw() {
@@ -87,7 +67,7 @@ void GameScene::Draw() {
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
 
-	sakura_->Draw(viewProjection_);
+	particle_->Draw(viewProjection_);
 
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();

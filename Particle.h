@@ -3,7 +3,7 @@
 #include "ViewProjection.h"
 #include "WorldTransform.h"
 
-class sakura 
+class Particle
 {
 public:
 	void Initialize(Model* model);
@@ -29,12 +29,10 @@ private:
 
 	Model* model_;
 
-	const int MaxSakura = 150;
+	Vector2 particleSpeed_[150];
+	Vector2 particleRotate_[150];
 
-	float SpeedX[150];
-	float SpeedY[150];
-	float RotateX[150];
-	float RotateY[150];
-	int isAlive[150];
-	int timer[150];
+	bool isAlive[150];
+
+	const int maxParticle = 150;
 };

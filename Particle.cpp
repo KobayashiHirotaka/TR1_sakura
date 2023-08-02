@@ -1,17 +1,17 @@
-#include "sakura.h"
+#include "Particle.h"
 #include "ImGuiManager.h"
 #include <cassert>
 #include <cstdlib> 
 
-void sakura::Initialize(Model* model)
+void Particle::Initialize(Model* model)
 {
 	assert(model);
 	model_ = model;
 }
 
-void sakura::Update() 
+void Particle::Update() 
 { 
-	for (int i = 0; i < MaxSakura; i++)
+	for (int i = 0; i < maxParticle; i++)
 	{
 		if (isAlive[i] == 0) {
 			isAlive[i] = 1;
@@ -19,42 +19,37 @@ void sakura::Update()
 			worldTransform_[i].translation_.y = RandomTY();
 			worldTransform_[i].translation_.z = RandomTZ();
 
-			SpeedX[i] = RandomSpeedX();
-			SpeedY[i] = RandomSpeedY();
+			particleSpeed_[i].x = RandomSpeedX();
+			particleSpeed_[i].y = RandomSpeedY();
 
-			RotateX[i] = RandomRotate();
-			RotateY[i] = RandomRotate();
+			particleRotate_[i].x = RandomRotate();
+			particleRotate_[i].y = RandomRotate();
 
 			worldTransform_[i].Initialize();
 		}
 	}
 
-	for (int i = 0; i < MaxSakura; i++)
+	for (int i = 0; i < maxParticle; i++)
 	{
 		if (isAlive[i] == 1)
 		{
-			worldTransform_[i].translation_.x -= SpeedX[i];
-			worldTransform_[i].translation_.y += SpeedY[i];
-			worldTransform_[i].rotation_.x += RotateX[i];
-			worldTransform_[i].rotation_.y += RotateY[i];
+			worldTransform_[i].translation_.x -= particleSpeed_[i].x;
+			worldTransform_[i].translation_.y += particleSpeed_[i].y;
+			worldTransform_[i].rotation_.x += particleRotate_[i].x;
+			worldTransform_[i].rotation_.y += particleRotate_[i].y;
 			worldTransform_[i].UpdateMatrix(); 
 
 			if (worldTransform_[i].translation_.x < -30)
 			{
-				timer[i]+=1;
-
-				if (timer[i] >= 250)
-				{
-					isAlive[i] = 0;
-				}
+				isAlive[i] = 0;
 			}
 		}
 	}
 }
 
-void sakura::Draw(ViewProjection& viewProjection) 
+void Particle::Draw(ViewProjection& viewProjection)
 {
-	for (int i = 0; i < MaxSakura; i++)
+	for (int i = 0; i < maxParticle; i++)
 	{
 		if (isAlive[i] == 1)
 		{
@@ -63,7 +58,7 @@ void sakura::Draw(ViewProjection& viewProjection)
 	}
 }
 
-float sakura::RandomTX()
+float Particle::RandomTX()
 {
 	float min = 40.0f;
 	float max = 120.0f;
@@ -71,7 +66,7 @@ float sakura::RandomTX()
 	return min + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (max - min)));
 }
 
-float sakura::RandomTY() 
+float Particle::RandomTY() 
 {
 	float min = -35.0f;
 	float max = 35.0f;
@@ -79,7 +74,7 @@ float sakura::RandomTY()
 	return min + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (max - min)));
 }
 
-float sakura::RandomTZ() 
+float Particle::RandomTZ()
 {
 	float min = -28.0f;
 	float max = 40.0f;
@@ -87,14 +82,15 @@ float sakura::RandomTZ()
 	return min + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (max - min)));
 }
 
-float sakura::RandomSpeedX() {
+float Particle::RandomSpeedX() 
+{
 	float min = 0.04f;
 	float max = 0.09f;
 
 	return min + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (max - min)));
 }
 
-float sakura::RandomSpeedY()
+float Particle::RandomSpeedY() 
 {
 	float min = -0.01f;
 	float max = 0.01f;
@@ -102,7 +98,7 @@ float sakura::RandomSpeedY()
 	return min + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (max - min)));
 }
 
-float sakura::RandomRotate() 
+float Particle::RandomRotate()
 {
 	float min = 0.01f;
 	float max = 0.1f;

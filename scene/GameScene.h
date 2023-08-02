@@ -9,7 +9,7 @@
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
-#include "sakura.h"
+#include "Particle.h"
 
 /// <summary>
 /// ゲームシーン
@@ -55,13 +55,8 @@ private: // メンバ変数
 	WorldTransform worldTransform_;
 	ViewProjection viewProjection_;
 
-
-	bool isDebugCameraActive_ = false;
-
-	DebugCamera* debugCamera_ = nullptr;
-
-	sakura* sakura_;
-	Model* sakuraModel_ = nullptr;
+	Particle* particle_;
+	Model* particleModel_ = nullptr;
 
 	/// <summary>
 	/// ゲームシーン用
