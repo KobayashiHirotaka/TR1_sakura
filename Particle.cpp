@@ -16,6 +16,8 @@ void Particle::Update()
 		if (isAlive[i] == 0)
 		{
 			isAlive[i] = 1;
+
+			worldTransform_[i].Initialize();
 			worldTransform_[i].translation_.x = RandomTX();
 			worldTransform_[i].translation_.y = RandomTY();
 			worldTransform_[i].translation_.z = RandomTZ();
@@ -23,10 +25,8 @@ void Particle::Update()
 			particleSpeed_[i].x = RandomSpeedX();
 			particleSpeed_[i].y = RandomSpeedY();
 
-			particleRotate_[i].x = RandomRotate();
-			particleRotate_[i].y = RandomRotate();
-
-			worldTransform_[i].Initialize();
+			particleRotate_[i].x = RandomRotateSpeed();
+			particleRotate_[i].y = RandomRotateSpeed();
 		}
 	}
 
@@ -99,7 +99,7 @@ float Particle::RandomSpeedY()
 	return min + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (max - min)));
 }
 
-float Particle::RandomRotate()
+float Particle::RandomRotateSpeed()
 {
 	float min = 0.01f;
 	float max = 0.1f;

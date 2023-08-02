@@ -26,9 +26,6 @@ void GameScene::Initialize() {
 	worldTransform_.Initialize();
 	viewProjection_.Initialize();
 
-	AxisIndicator::GetInstance()->SetVisible(true);
-	AxisIndicator::GetInstance()->SetTargetViewProjection(&viewProjection_);
-
 	particleModel_ = Model::CreateFromOBJ("SAKURA", true);
 	particle_ = new Particle();
 	particle_->Initialize(particleModel_);

@@ -22,7 +22,7 @@ public:
 
 	float RandomSpeedY();
 
-	float RandomRotate();
+	float RandomRotateSpeed();
 
 private:
 	WorldTransform worldTransform_[150];
