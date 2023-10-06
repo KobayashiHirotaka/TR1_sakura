@@ -26,7 +26,7 @@ void GameScene::Initialize() {
 	worldTransform_.Initialize();
 	viewProjection_.Initialize();
 
-	particleModel_ = Model::CreateFromOBJ("SAKURA", true);
+	particleModel_ = Model::CreateFromOBJ("cube", true);
 	particle_ = new Particle();
 	particle_->Initialize(particleModel_);
 }

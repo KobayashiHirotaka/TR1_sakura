@@ -12,15 +12,9 @@ public:
 
 	void Draw(ViewProjection& viewProjection);
 
-	float RandomTX();
+	void Finalize();
 
-	float RandomTY();
-
-	float RandomTZ();
-
-	float RandomSpeedX();
-
-	float RandomSpeedY();
+	float RandomSpeed();
 
 	float RandomRotateSpeed();
 
@@ -29,10 +23,11 @@ private:
 
 	Model* model_;
 
-	Vector2 particleSpeed_[150];
+	Vector3 particleSpeed_[150];
 	Vector2 particleRotate_[150];
 
 	bool isAlive[150];
+	int particleTimer = 150;
 
 	const int maxParticle = 150;
 };
