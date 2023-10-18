@@ -18,6 +18,8 @@ public:
 
 	float RandomRotateSpeed();
 
+	float RandomRotateSpeed2();
+
 private:
 	WorldTransform worldTransform_[150];
 
