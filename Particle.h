@@ -29,7 +29,7 @@ private:
 	Vector2 particleRotate_[150];
 
 	bool isAlive[150];
-	int particleTimer = 150;
+	int particleTimer = 500;
 
 	const int maxParticle = 150;
 };

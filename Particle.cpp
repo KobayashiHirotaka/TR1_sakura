@@ -71,7 +71,7 @@ void Particle::Update()
 			if (particleTimer < 0)
 			{
 				isAlive[i] = 0;
-				particleTimer = 150;
+				particleTimer = 500;
 			}
 		}
 	}
